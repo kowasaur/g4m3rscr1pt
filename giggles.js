@@ -7,10 +7,16 @@ const lexer = require("./lexer")
 var grammar = {
     Lexer: lexer,
     ParserRules: [
-    {"name": "statement", "symbols": ["var_assign"]},
-    {"name": "var_assign", "symbols": [(lexer.has("identifier") ? {type: "identifier"} : identifier), "_", {"literal":":"}, "_", "expr"]},
-    {"name": "expr", "symbols": [(lexer.has("string") ? {type: "string"} : string)]},
-    {"name": "expr", "symbols": [(lexer.has("number") ? {type: "number"} : number)]},
+    {"name": "statement", "symbols": ["var_assign"], "postprocess": id},
+    {"name": "var_assign", "symbols": [(lexer.has("identifier") ? {type: "identifier"} : identifier), "_", {"literal":":"}, "_", "expr"], "postprocess": 
+        data => ({
+          type: "var_assign",
+          var_name: data[0],
+          value: data[4]
+        })
+            },
+    {"name": "expr", "symbols": [(lexer.has("string") ? {type: "string"} : string)], "postprocess": id},
+    {"name": "expr", "symbols": [(lexer.has("number") ? {type: "number"} : number)], "postprocess": id},
     {"name": "_$ebnf$1", "symbols": []},
     {"name": "_$ebnf$1", "symbols": ["_$ebnf$1", (lexer.has("WS") ? {type: "WS"} : WS)], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "_", "symbols": ["_$ebnf$1"]},

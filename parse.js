@@ -15,4 +15,10 @@ const code = fs.readFileSync(filename, "utf8");
 const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
 
 parser.feed(code);
-console.log(parser.results);
+if (parser.results.length > 1) throw new Error("Error: ambiguous grammar detected");
+else if (parser.results.length < 1) throw new Error("Error: no parse found");
+
+const ast = parser.results[0];
+const outputFilename = filename.replace(".sag", ".ast");
+fs.writeFileSync(outputFilename, JSON.stringify(ast, null, 2));
+console.log(`Wrote ${outputFilename}`);
