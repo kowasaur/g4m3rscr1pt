@@ -1,11 +1,22 @@
 @{%
-const lexer = require("./lexer") 
+  const lexer = require("./lexer") 
 %}
 
 @lexer lexer
 
+statements
+  -> statement
+    {%
+      data => ([data[0]])
+    %}
+  | statements %NL statement
+    {%
+      data => ([...data[0], data[2]])
+    %}
+
 statement
   -> var_assign {% id %}
+  | fun_call {% id %}
 
 var_assign
   -> %identifier _ ":" _ expr
@@ -17,9 +28,30 @@ var_assign
       })
     %}
 
+fun_call
+  -> "/" %identifier _ "{" _ (arg_list _):? "}"
+    {%
+      data => ({
+        type: "fun_call",
+        fun_name: data[1],
+        arguments: data[5] ? data[5][0] : []
+      })
+    %}
+
+arg_list
+  -> expr
+    {%
+      data => ([data[0]])
+    %}
+  | arg_list __ expr
+    {%
+      data => ([...data[0], data[2]])
+    %}
+
 expr
   -> %string {% id %}
   | %number {% id %}
+  | %identifier {% id %}
 
 _ -> %WS:*
 
