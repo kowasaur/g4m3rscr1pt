@@ -1,16 +1,16 @@
 const fs = require("fs");
-const { hasExtension, replaceStringCharacters } = require("./util.js");
+const { hasExtension, replaceStringCharacters, jsifyString } = require("./util.js");
 const { numbers } = require("./constants.js");
 
 function generateJsForStatementOrExpr(node) {
   switch (node.type) {
     case "var_assign":
-      const varName = node.var_name.value;
+      const varName = jsifyString(node.var_name.value);
       const jsExpr = generateJsForStatementOrExpr(node.value);
       return `let ${varName} = ${jsExpr};`;
 
     case "fun_call":
-      const funName = node.fun_name.value;
+      const funName = jsifyString(node.fun_name.value);
       const argList = node.arguments.map(arg => generateJsForStatementOrExpr(arg)).join(", ");
       return `${funName}(${argList})`;
 
@@ -20,8 +20,9 @@ function generateJsForStatementOrExpr(node) {
       return node.value.replace("]", "'").replace("[", "'");
     case "number":
       return parseInt(replaceStringCharacters(node.value, numbers), 5);
-    case "JS":
     case "identifier":
+      node.value = jsifyString(node.value);
+    case "JS":
       return node.value;
     default:
       throw new Error(`Unhandled AST node type ${node.type}`);

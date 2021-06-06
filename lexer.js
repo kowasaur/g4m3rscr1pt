@@ -15,8 +15,7 @@ const lexer = moo.compile({
   slash2: "//",
   slash: "/",
   // numbers and consonants only for variables and functions
-  // TODO: may have to make numbers not allowed for first character
-  identifier: /[^aeiou\W]+/,
+  identifier: /[^aeiouAEIOU\W]+/,
   assign: ":",
   // keyword: ["while", "if", "else", "moo", "cows"],
   NL: { match: /\n/, lineBreaks: true },

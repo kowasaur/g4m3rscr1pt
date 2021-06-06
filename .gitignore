@@ -75,5 +75,5 @@ typings/
 # FuseBox cache
 .fusebox/
 
-# generated for .sag files
-*.ast
+# test file
+ex1.*

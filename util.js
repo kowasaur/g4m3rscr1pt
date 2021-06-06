@@ -1,3 +1,5 @@
+const { identifierChars } = require("./constants.js");
+
 function hasExtension(file, extension) {
   if (!file) return false;
   if (file.split(".").pop() === extension) return true;
@@ -14,7 +16,19 @@ function replaceStringCharacters(str, characters) {
   return str;
 }
 
+/**
+ * @param {string} str
+ * @returns {string}
+ */
+function jsifyString(str) {
+  if (Object.keys(identifierChars).includes(str[0])) {
+    return identifierChars[str[0]] + str.slice(1);
+  }
+  return str;
+}
+
 module.exports = {
   hasExtension,
   replaceStringCharacters,
+  jsifyString,
 };
