@@ -1,11 +1,7 @@
 const nearley = require("nearley");
 const fs = require("fs");
 const grammar = require("./giggles.js");
-
-function hasExtension(file, extension) {
-  if (file.split(".").pop() === extension) return true;
-  else return false;
-}
+const { hasExtension } = require("./util.js");
 
 const filename = process.argv[2];
 if (!hasExtension(filename, "sag")) {

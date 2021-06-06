@@ -52,6 +52,7 @@ expr
   -> %string {% id %}
   | %number {% id %}
   | %identifier {% id %}
+  | fun_call {% id %}
 
 _ -> %WS:*
 
