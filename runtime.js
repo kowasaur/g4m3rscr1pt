@@ -1,3 +1,5 @@
+/* This code is apart of the standard library */
+
 // This can log things that can turn into strings as well
 function R33333(stringConveritble) {
   console.log(String(stringConveritble).toUpperCase());

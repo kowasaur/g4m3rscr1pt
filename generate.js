@@ -14,6 +14,9 @@ function generateJsForStatementOrExpr(node) {
       const argList = node.arguments.map(arg => generateJsForStatementOrExpr(arg)).join(", ");
       return `${funName}(${argList})`;
 
+    case "comment":
+      return node.value.replace("@", "//");
+
     case "string":
       /* The reason why I didn't use the replaceStringCharacters function here is 
       that the [ broke the regex */
@@ -44,7 +47,7 @@ if (!hasExtension(filename, "ast")) throw new Error("You must provide a .ast fil
 const astJson = fs.readFileSync(filename, "utf8");
 const runtimeJs = fs.readFileSync("./runtime.js", "utf8");
 const statements = JSON.parse(astJson);
-const jsCode = generateJsForStatements(statements) + runtimeJs;
+const jsCode = generateJsForStatements(statements) + "\n\n" + runtimeJs;
 const outputFilename = filename.replace(".ast", ".js");
 fs.writeFileSync(outputFilename, jsCode);
 console.log(`Wrote ${outputFilename}`);

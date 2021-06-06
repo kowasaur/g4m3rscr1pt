@@ -4,19 +4,26 @@
 
 @lexer lexer
 
-statements
-  -> statement
+program
+  -> _ml statements _ml
     {%
-      data => ([data[0]])
+      data => (data[1])
     %}
-  | statements %NL statement
+
+statements
+  ->  statement (__lb_ statement):*
     {%
-      data => ([...data[0], data[2]])
+      data => {
+        const repeated = data[1];
+        const restStatements = repeated.map(chunks => chunks[1]);
+        return [data[0], ...restStatements];
+      }
     %}
 
 statement
   -> var_assign {% id %}
   | fun_call {% id %}
+  | %comment {% id %}
   | %JS 
     {%
       data => ({...data[0], value: data[0].value
@@ -34,7 +41,7 @@ var_assign
     %}
 
 fun_call
-  -> "/" %identifier _ "{" _ (arg_list _):? "}"
+  -> "/" %identifier _ "{" _ml (arg_list _ml):? "}"
     {%
       data => ({
         type: "fun_call",
@@ -48,7 +55,7 @@ arg_list
     {%
       data => ([data[0]])
     %}
-  | arg_list __ expr
+  | arg_list __ml expr
     {%
       data => ([...data[0], data[2]])
     %}
@@ -62,3 +69,12 @@ expr
 _ -> %WS:*
 
 __ -> %WS:+
+
+# Optional multi-line whitespace
+_ml -> (%WS | %NL):*
+
+# Mandatory multi-line whitespace
+__ml -> (%WS | %NL):+
+
+# Mandatory line-break with optional whitespace around it
+__lb_ -> (_ %NL):+ _
