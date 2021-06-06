@@ -4,6 +4,7 @@
   "description": "An esolang that transpiles to JavaScript",
   "main": "index.js",
   "scripts": {
+    "start": "node run.js ex1.sag",
     "gen-parser": "nearleyc giggles.ne -o giggles.js"
   },
   "author": "kowasaur",

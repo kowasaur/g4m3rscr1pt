@@ -1,5 +1,4 @@
 const moo = require("moo");
-const fs = require("fs");
 
 const lexer = moo.compile({
   JS: /I'M CHEATING\s*<[^]+>\s*I'M NOT CHEATING ANYMORE/,
@@ -22,14 +21,3 @@ const lexer = moo.compile({
 });
 
 module.exports = lexer;
-
-function main() {
-  const code = fs.readFileSync("./example.sag", "utf8");
-  lexer.reset(code);
-
-  while (true) {
-    const token = lexer.next();
-    if (!token) break;
-    console.log(token);
-  }
-}
