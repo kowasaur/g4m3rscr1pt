@@ -17,6 +17,11 @@ statements
 statement
   -> var_assign {% id %}
   | fun_call {% id %}
+  | %JS 
+    {%
+      data => ({...data[0], value: data[0].value
+        .match(/I'M CHEATING\s*<([^<]+)>\s*I'M NOT CHEATING ANYMORE/)[1]})
+    %}
 
 var_assign
   -> %identifier _ ":" _ expr

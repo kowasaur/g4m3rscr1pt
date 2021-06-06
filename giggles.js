@@ -15,6 +15,10 @@ var grammar = {
             },
     {"name": "statement", "symbols": ["var_assign"], "postprocess": id},
     {"name": "statement", "symbols": ["fun_call"], "postprocess": id},
+    {"name": "statement", "symbols": [(lexer.has("JS") ? {type: "JS"} : JS)], "postprocess": 
+        data => ({...data[0], value: data[0].value
+          .match(/I'M CHEATING\s*<([^<]+)>\s*I'M NOT CHEATING ANYMORE/)[1]})
+            },
     {"name": "var_assign", "symbols": [(lexer.has("identifier") ? {type: "identifier"} : identifier), "_", {"literal":":"}, "_", "expr"], "postprocess": 
         data => ({
           type: "var_assign",

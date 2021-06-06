@@ -14,14 +14,15 @@ function generateJsForStatementOrExpr(node) {
       const argList = node.arguments.map(arg => generateJsForStatementOrExpr(arg)).join(", ");
       return `${funName}(${argList})`;
 
-    case "identifier":
-      return node.value;
     case "string":
       /* The reason why I didn't use the replaceStringCharacters function here is 
       that the [ broke the regex */
       return node.value.replace("]", "'").replace("[", "'");
     case "number":
       return parseInt(replaceStringCharacters(node.value, numbers), 5);
+    case "JS":
+    case "identifier":
+      return node.value;
     default:
       throw new Error(`Unhandled AST node type ${node.type}`);
   }

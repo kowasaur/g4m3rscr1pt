@@ -2,6 +2,7 @@ const moo = require("moo");
 const fs = require("fs");
 
 const lexer = moo.compile({
+  JS: /I'M CHEATING\s*<[^]+>\s*I'M NOT CHEATING ANYMORE/,
   WS: /[ \t]+/,
   comment: /@.*?$/,
   // only vowels
