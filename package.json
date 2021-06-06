@@ -1,0 +1,18 @@
+{
+  "name": "giggles",
+  "version": "0.1.0",
+  "description": "An esolang that transpiles to JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "gen-parser": "nearleyc giggles.ne -o giggles.js"
+  },
+  "author": "kowasaur",
+  "license": "ISC",
+  "dependencies": {
+    "moo": "^0.5.1",
+    "nearley": "^2.20.1"
+  },
+  "devDependencies": {
+    "@types/node": "^15.12.1"
+  }
+}
