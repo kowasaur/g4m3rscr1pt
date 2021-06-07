@@ -1,4 +1,5 @@
 const moo = require("moo");
+const { EOL } = require("os");
 
 const lexer = moo.compile({
   JS: /I'M CHEATING\s*<[^]+>\s*I'M NOT CHEATING ANYMORE/,
@@ -17,7 +18,7 @@ const lexer = moo.compile({
   identifier: /[^aeiouAEIOU\W]+/,
   assign: ":",
   // keyword: ["while", "if", "else", "moo", "cows"],
-  NL: { match: /\n/, lineBreaks: true },
+  NL: { match: new RegExp(`[${EOL}]+`), lineBreaks: true },
 });
 
 module.exports = lexer;

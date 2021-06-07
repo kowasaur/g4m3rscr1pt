@@ -23,7 +23,6 @@ statements
 statement
   -> var_assign {% id %}
   | fun_call {% id %}
-  | %comment {% id %}
   | %JS 
     {%
       data => ({...data[0], value: data[0].value
@@ -77,4 +76,4 @@ _ml -> (%WS | %NL):*
 __ml -> (%WS | %NL):+
 
 # Mandatory line-break with optional whitespace around it
-__lb_ -> (_ %NL):+ _
+__lb_ -> (_ %comment:* %NL):+ _

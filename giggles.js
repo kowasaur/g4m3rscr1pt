@@ -22,7 +22,6 @@ var grammar = {
             },
     {"name": "statement", "symbols": ["var_assign"], "postprocess": id},
     {"name": "statement", "symbols": ["fun_call"], "postprocess": id},
-    {"name": "statement", "symbols": [(lexer.has("comment") ? {type: "comment"} : comment)], "postprocess": id},
     {"name": "statement", "symbols": [(lexer.has("JS") ? {type: "JS"} : JS)], "postprocess": 
         data => ({...data[0], value: data[0].value
           .match(/I'M CHEATING\s*<([^<]+)>\s*I'M NOT CHEATING ANYMORE/)[1]})
@@ -72,9 +71,13 @@ var grammar = {
     {"name": "__ml$ebnf$1$subexpression$2", "symbols": [(lexer.has("NL") ? {type: "NL"} : NL)]},
     {"name": "__ml$ebnf$1", "symbols": ["__ml$ebnf$1", "__ml$ebnf$1$subexpression$2"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "__ml", "symbols": ["__ml$ebnf$1"]},
-    {"name": "__lb_$ebnf$1$subexpression$1", "symbols": ["_", (lexer.has("NL") ? {type: "NL"} : NL)]},
+    {"name": "__lb_$ebnf$1$subexpression$1$ebnf$1", "symbols": []},
+    {"name": "__lb_$ebnf$1$subexpression$1$ebnf$1", "symbols": ["__lb_$ebnf$1$subexpression$1$ebnf$1", (lexer.has("comment") ? {type: "comment"} : comment)], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "__lb_$ebnf$1$subexpression$1", "symbols": ["_", "__lb_$ebnf$1$subexpression$1$ebnf$1", (lexer.has("NL") ? {type: "NL"} : NL)]},
     {"name": "__lb_$ebnf$1", "symbols": ["__lb_$ebnf$1$subexpression$1"]},
-    {"name": "__lb_$ebnf$1$subexpression$2", "symbols": ["_", (lexer.has("NL") ? {type: "NL"} : NL)]},
+    {"name": "__lb_$ebnf$1$subexpression$2$ebnf$1", "symbols": []},
+    {"name": "__lb_$ebnf$1$subexpression$2$ebnf$1", "symbols": ["__lb_$ebnf$1$subexpression$2$ebnf$1", (lexer.has("comment") ? {type: "comment"} : comment)], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "__lb_$ebnf$1$subexpression$2", "symbols": ["_", "__lb_$ebnf$1$subexpression$2$ebnf$1", (lexer.has("NL") ? {type: "NL"} : NL)]},
     {"name": "__lb_$ebnf$1", "symbols": ["__lb_$ebnf$1", "__lb_$ebnf$1$subexpression$2"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "__lb_", "symbols": ["__lb_$ebnf$1", "_"]}
 ]
