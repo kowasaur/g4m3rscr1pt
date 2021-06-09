@@ -1,11 +1,11 @@
 {
-  "name": "giggles",
+  "name": "g4m3rscr1pt",
   "version": "0.1.0",
   "description": "An esolang that transpiles to JavaScript",
   "main": "index.js",
   "scripts": {
-    "start": "node run.js ex1.sag",
-    "gen-parser": "nearleyc giggles.ne -o giggles.js"
+    "start": "node src/run.js ex1.p0g",
+    "gen-parser": "nearleyc src/grammar.ne -o src/grammar.js"
   },
   "author": "kowasaur",
   "license": "ISC",
@@ -18,6 +18,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kowasaur/giggles.git"
+    "url": "https://github.com/kowasaur/g4m3rscr1pt.git"
   }
 }

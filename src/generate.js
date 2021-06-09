@@ -45,7 +45,7 @@ const filename = process.argv[2];
 if (!hasExtension(filename, "ast")) throw new Error("You must provide a .ast file");
 
 const astJson = fs.readFileSync(filename, "utf8");
-const runtimeJs = fs.readFileSync("./runtime.js", "utf8");
+const runtimeJs = fs.readFileSync("src/runtime.js", "utf8");
 const statements = JSON.parse(astJson);
 const jsCode = generateJsForStatements(statements) + "\n\n" + runtimeJs;
 const outputFilename = filename.replace(".ast", ".js");
