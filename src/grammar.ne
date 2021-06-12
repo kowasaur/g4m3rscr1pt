@@ -40,12 +40,13 @@ var_assign
     %}
 
 fun_call
-  -> "/" %identifier _ "{" _ml (arg_list _ml):? "}"
+  -> "/":+ %identifier _ ("{" _ml arg_list _ml "}"):?
     {%
       data => ({
         type: "fun_call",
         fun_name: data[1],
-        arguments: data[5] ? data[5][0] : []
+        arguments: data[3] ? data[3][2] : [],
+        runs: data[0].length
       })
     %}
 
@@ -70,7 +71,7 @@ _ -> %WS:*
 __ -> %WS:+
 
 # Optional multi-line whitespace
-_ml -> (%WS | %NL):*
+_ml -> (%WS | %comment | %NL):*
 
 # Mandatory multi-line whitespace
 __ml -> (%WS | %NL):+

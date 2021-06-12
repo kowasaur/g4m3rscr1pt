@@ -11,8 +11,19 @@ function generateJsForStatementOrExpr(node) {
 
     case "fun_call":
       const funName = jsifyString(node.fun_name.value);
-      const argList = node.arguments.map(arg => generateJsForStatementOrExpr(arg)).join(", ");
-      return `(await ${funName}(${argList}))`;
+      let firstArg;
+      let argList;
+      if (node.arguments.length) {
+        firstArg = generateJsForStatementOrExpr(node.arguments[0]);
+        argList = node.arguments
+          .slice(1)
+          .map(arg => generateJsForStatementOrExpr(arg))
+          .join(", ");
+      } else firstArg = argList = "";
+      const runs = node.runs;
+      return `${`await ${funName}(`.repeat(runs)}${firstArg}${
+        argList ? `, ${argList})`.repeat(runs) : ")".repeat(runs)
+      }`;
 
     case "comment":
       return node.value.replace("@", "//");

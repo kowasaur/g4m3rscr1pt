@@ -33,14 +33,17 @@ var grammar = {
           value: data[4]
         })
             },
-    {"name": "fun_call$ebnf$1$subexpression$1", "symbols": ["arg_list", "_ml"]},
-    {"name": "fun_call$ebnf$1", "symbols": ["fun_call$ebnf$1$subexpression$1"], "postprocess": id},
-    {"name": "fun_call$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "fun_call", "symbols": [{"literal":"/"}, (lexer.has("identifier") ? {type: "identifier"} : identifier), "_", {"literal":"{"}, "_ml", "fun_call$ebnf$1", {"literal":"}"}], "postprocess": 
+    {"name": "fun_call$ebnf$1", "symbols": [{"literal":"/"}]},
+    {"name": "fun_call$ebnf$1", "symbols": ["fun_call$ebnf$1", {"literal":"/"}], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "fun_call$ebnf$2$subexpression$1", "symbols": [{"literal":"{"}, "_ml", "arg_list", "_ml", {"literal":"}"}]},
+    {"name": "fun_call$ebnf$2", "symbols": ["fun_call$ebnf$2$subexpression$1"], "postprocess": id},
+    {"name": "fun_call$ebnf$2", "symbols": [], "postprocess": function(d) {return null;}},
+    {"name": "fun_call", "symbols": ["fun_call$ebnf$1", (lexer.has("identifier") ? {type: "identifier"} : identifier), "_", "fun_call$ebnf$2"], "postprocess": 
         data => ({
           type: "fun_call",
           fun_name: data[1],
-          arguments: data[5] ? data[5][0] : []
+          arguments: data[3] ? data[3][2] : [],
+          runs: data[0].length
         })
             },
     {"name": "arg_list", "symbols": ["expr"], "postprocess": 
@@ -61,6 +64,7 @@ var grammar = {
     {"name": "__", "symbols": ["__$ebnf$1"]},
     {"name": "_ml$ebnf$1", "symbols": []},
     {"name": "_ml$ebnf$1$subexpression$1", "symbols": [(lexer.has("WS") ? {type: "WS"} : WS)]},
+    {"name": "_ml$ebnf$1$subexpression$1", "symbols": [(lexer.has("comment") ? {type: "comment"} : comment)]},
     {"name": "_ml$ebnf$1$subexpression$1", "symbols": [(lexer.has("NL") ? {type: "NL"} : NL)]},
     {"name": "_ml$ebnf$1", "symbols": ["_ml$ebnf$1", "_ml$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "_ml", "symbols": ["_ml$ebnf$1"]},

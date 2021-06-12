@@ -102,6 +102,7 @@ function str1ng1fy(num) {
   // I couldn't think of a good name for this variable
   let numStr = num.toString(5);
   numbers.forEach(pair => (numStr = numStr.replace(new RegExp(pair[1], "g"), pair[0])));
+  return numStr;
 }
 
 /**
@@ -109,7 +110,7 @@ function str1ng1fy(num) {
  * @param {string} char
  */
 function ch4rC0d3(char) {
-  char.charCodeAt(0);
+  return char.charCodeAt(0);
 }
 
 // async function main() {

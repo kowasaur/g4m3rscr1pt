@@ -8,11 +8,9 @@ const lexer = moo.compile({
   // only vowels
   number: /[aeiou]+/,
   // e.g. ]this is a string[
-  string: /](?:\\["\\]|[^\n"\\])*\[/,
+  string: /](?:\\[]\\]|[^\n[\\])*\[/,
   lcurly: "{",
   rcurly: "}",
-  question: "?",
-  slash2: "//",
   slash: "/",
   // numbers and consonants only for variables and functions
   identifier: /[^aeiouAEIOU\W]+/,
