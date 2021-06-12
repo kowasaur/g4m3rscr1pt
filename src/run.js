@@ -10,11 +10,11 @@ async function main() {
   }
 
   const astFilename = filename.replace(".p0g", ".ast");
-  const jsFilename = filename.replace(".p0g", ".js");
+  // const jsFilename = filename.replace(".p0g", ".js");
 
   await exec(`node src/parse.js ${filename}`);
   await exec(`node src/generate.js ${astFilename}`);
-  console.log((await exec(`node ${jsFilename}`)).stdout);
+  // console.log((await exec(`node ${jsFilename}`)).stdout);
 }
 
 main().catch(err => console.error(err));

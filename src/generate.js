@@ -1,18 +1,18 @@
 const fs = require("fs");
 const { hasExtension, replaceStringCharacters, jsifyString } = require("./util.js");
-const { numbers } = require("./constants.js");
+const { numbers, wrapperStart, wrapperEnd } = require("./constants.js");
 
 function generateJsForStatementOrExpr(node) {
   switch (node.type) {
     case "var_assign":
       const varName = jsifyString(node.var_name.value);
       const jsExpr = generateJsForStatementOrExpr(node.value);
-      return `let ${varName} = ${jsExpr};`;
+      return `let ${varName} = ${jsExpr}`;
 
     case "fun_call":
       const funName = jsifyString(node.fun_name.value);
       const argList = node.arguments.map(arg => generateJsForStatementOrExpr(arg)).join(", ");
-      return `${funName}(${argList})`;
+      return `(await ${funName}(${argList}))`;
 
     case "comment":
       return node.value.replace("@", "//");
@@ -38,7 +38,7 @@ function generateJsForStatements(statements) {
     const line = generateJsForStatementOrExpr(statement);
     lines.push(line);
   });
-  return lines.join("\n");
+  return lines.join(";\n") + ";";
 }
 
 const filename = process.argv[2];
@@ -47,7 +47,7 @@ if (!hasExtension(filename, "ast")) throw new Error("You must provide a .ast fil
 const astJson = fs.readFileSync(filename, "utf8");
 const runtimeJs = fs.readFileSync("src/runtime.js", "utf8");
 const statements = JSON.parse(astJson);
-const jsCode = generateJsForStatements(statements) + "\n\n" + runtimeJs;
+const jsCode = runtimeJs + wrapperStart + generateJsForStatements(statements) + wrapperEnd;
 const outputFilename = filename.replace(".ast", ".js");
 fs.writeFileSync(outputFilename, jsCode);
 console.log(`Wrote ${outputFilename}`);

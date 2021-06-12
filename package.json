@@ -4,7 +4,7 @@
   "description": "An esolang that transpiles to JavaScript",
   "main": "index.js",
   "scripts": {
-    "start": "node src/run.js ex1.p0g",
+    "start": "node src/run.js ex1.p0g && node ex1.js",
     "gen-parser": "nearleyc src/grammar.ne -o src/grammar.js"
   },
   "author": "kowasaur",

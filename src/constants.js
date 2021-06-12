@@ -19,7 +19,22 @@ const identifierChars = {
   9: "U",
 };
 
+const wrapperStart = `
+async function main() {
+`;
+const wrapperEnd = `
+}
+
+(async () => {
+  while (true) {
+    await main();
+    await chr1s(0.1);
+  }
+})();`;
+
 module.exports = {
   numbers,
   identifierChars,
+  wrapperStart,
+  wrapperEnd,
 };
