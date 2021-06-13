@@ -1,0 +1,27 @@
+@ This program prints the lyrics to the song "99 Bottles of Beer"
+@ As there is no way of printing lowercase letters, everything is uppercase
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+s1ng moment {b0ttl3s} ??!?1!
+  yeah ??!?1!
+    /D1V1D3{e /M1n7S{b0ttl3s e}}
+    /R33333{/sq4sh{b0ttl3s ] bottles of beer on the wall,[}}
+    /R33333{/sq4sh{b0ttl3s ] bottles of beer.[}}
+    /R33333{]Take one down, pass it around,[}
+    b0ttl3s: /M1n7S{b0ttl3s e}
+    /R33333{/sq4sh{b0ttl3s ] bottles of beer on the wall.[}}
+    /R33333{][}
+    /s1ng{b0ttl3s}
+  !?!!?? nah ??!?1!
+    /R33333{]1 bottle of beer on the wall,[}
+    /R33333{]1 bottle of beer![}
+    /R33333{]Take one down, pass it around,[}
+    /R33333{]No more bottles of beer on the wall![}
+    /R33333{][}
+  !?!!??
+!?!!??
+
+@ start with 99 bottles
+/s1ng{ouu}
+
+/BR4P

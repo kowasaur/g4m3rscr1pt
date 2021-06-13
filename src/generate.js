@@ -15,7 +15,8 @@ function generateJsForStatementOrExpr(node) {
     case "var_assign":
       const varName = jsifyString(node.var_name.value);
       const jsExpr = generateJsForStatementOrExpr(node.value);
-      return `let ${varName} = ${jsExpr}`;
+      // let can't be used since it won't work if the variables value changes
+      return `${varName} = ${jsExpr}`;
 
     case "fun_call":
       const funName = jsifyString(node.fun_name.value);

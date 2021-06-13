@@ -1,0 +1,29 @@
+@ This program will output 0 if the input is 0 and then terminate
+@ If the input is anything else, it will print 1s indefinitely
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+@ prompt the user which "Number: " and store the input in the variable n
+n: /cl1ck1tyCl1ck{]Number: [}
+
+@ define a command called tr7th that has no parameters
+tr7th moment ??!?1!
+  @ attempt to run everything in this block
+  yeah ??!?1!
+    @ divide 1 by n. If n is 0 then the nah block will run
+    /D1V1D3{e n}
+    @ print 1
+    /R33333{e}
+    @ execute tr7th
+    /tr7th
+  @ execute if error in yeah block
+  !?!!?? nah ??!?1!
+    @ print 0
+    /R33333{a}
+    @ cause an error. This is done since all g4m3rscr1pt 
+    @ programs loop forever unless there's an uncaught error
+    /BR4P
+  !?!!??
+!?!!??
+
+@ execute tr7th
+/tr7th
