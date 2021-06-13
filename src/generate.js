@@ -4,6 +4,14 @@ const { numbers, wrapperStart, wrapperEnd } = require("./constants.js");
 
 function generateJsForStatementOrExpr(node) {
   switch (node.type) {
+    case "fun_def":
+      const params = node.parameters.map(param => generateJsForStatementOrExpr(param)).join(", ");
+      const statements = generateJsForStatements(node.statements);
+      return `async function ${jsifyString(node.name)}(${params}) {\n${statements}\n}`;
+
+    case "return":
+      return `return ${generateJsForStatementOrExpr(node.expr)}`;
+
     case "var_assign":
       const varName = jsifyString(node.var_name.value);
       const jsExpr = generateJsForStatementOrExpr(node.value);
@@ -24,9 +32,6 @@ function generateJsForStatementOrExpr(node) {
       return `${`await ${funName}(`.repeat(runs)}${firstArg}${
         argList ? `, ${argList})`.repeat(runs) : ")".repeat(runs)
       }`;
-
-    case "comment":
-      return node.value.replace("@", "//");
 
     case "string":
       /* The reason why I didn't use the replaceStringCharacters function here is 

@@ -28,6 +28,44 @@ statement
       data => ({...data[0], value: data[0].value
         .match(/I'M CHEATING\s*<([^<]+)>\s*I'M NOT CHEATING ANYMORE/)[1]})
     %}
+  | fun_def {% id %}
+  | return {% id %}
+
+fun_def
+  -> %identifier __ "moment" param_list:? block
+  {%
+    data => ({
+      type: "fun_def",
+      name: data[0].value,
+      parameters: data[3] ?? [],
+      statements: data[4]
+    })
+  %}
+
+param_list
+  -> _ "{" %identifier (__ %identifier):* "}"
+    {%
+      data => {
+        const repeatedPieces = data[3];
+        const restParams = repeatedPieces.map(piece => piece[1]);
+        return [data[2], ...restParams];
+      }
+    %}
+
+block
+  -> _ml %openblock __lb_ statements __lb_ %closeblock
+  {%
+    data => data[3]
+  %}
+
+return
+  -> "https://imgur.com/jWr67J8" __ expr
+  {%
+    data => ({
+      type: "return",
+      expr: data[2]
+    })
+  %}
 
 var_assign
   -> %identifier _ ":" _ expr

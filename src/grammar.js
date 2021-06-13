@@ -26,6 +26,37 @@ var grammar = {
         data => ({...data[0], value: data[0].value
           .match(/I'M CHEATING\s*<([^<]+)>\s*I'M NOT CHEATING ANYMORE/)[1]})
             },
+    {"name": "statement", "symbols": ["fun_def"], "postprocess": id},
+    {"name": "statement", "symbols": ["return"], "postprocess": id},
+    {"name": "fun_def$ebnf$1", "symbols": ["param_list"], "postprocess": id},
+    {"name": "fun_def$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
+    {"name": "fun_def", "symbols": [(lexer.has("identifier") ? {type: "identifier"} : identifier), "__", {"literal":"moment"}, "fun_def$ebnf$1", "block"], "postprocess": 
+        data => ({
+          type: "fun_def",
+          name: data[0].value,
+          parameters: data[3] ?? [],
+          statements: data[4]
+        })
+          },
+    {"name": "param_list$ebnf$1", "symbols": []},
+    {"name": "param_list$ebnf$1$subexpression$1", "symbols": ["__", (lexer.has("identifier") ? {type: "identifier"} : identifier)]},
+    {"name": "param_list$ebnf$1", "symbols": ["param_list$ebnf$1", "param_list$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "param_list", "symbols": ["_", {"literal":"{"}, (lexer.has("identifier") ? {type: "identifier"} : identifier), "param_list$ebnf$1", {"literal":"}"}], "postprocess": 
+        data => {
+          const repeatedPieces = data[3];
+          const restParams = repeatedPieces.map(piece => piece[1]);
+          return [data[2], ...restParams];
+        }
+            },
+    {"name": "block", "symbols": ["_ml", (lexer.has("openblock") ? {type: "openblock"} : openblock), "__lb_", "statements", "__lb_", (lexer.has("closeblock") ? {type: "closeblock"} : closeblock)], "postprocess": 
+        data => data[3]
+          },
+    {"name": "return", "symbols": [{"literal":"https://imgur.com/jWr67J8"}, "__", "expr"], "postprocess": 
+        data => ({
+          type: "return",
+          expr: data[2]
+        })
+          },
     {"name": "var_assign", "symbols": [(lexer.has("identifier") ? {type: "identifier"} : identifier), "_", {"literal":":"}, "_", "expr"], "postprocess": 
         data => ({
           type: "var_assign",

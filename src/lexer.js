@@ -2,6 +2,9 @@ const moo = require("moo");
 const { EOL } = require("os");
 
 const lexer = moo.compile({
+  keyword: ["yeah", "nah", "moment", "https://imgur.com/jWr67J8"],
+  openblock: "??!?1!",
+  closeblock: "!?!!??",
   JS: /I'M CHEATING\s*<[^]+>\s*I'M NOT CHEATING ANYMORE/,
   WS: /[ \t]+/,
   comment: /@.*?$/,
@@ -15,7 +18,6 @@ const lexer = moo.compile({
   // numbers and consonants only for variables and functions
   identifier: /[^aeiouAEIOU\W]+/,
   assign: ":",
-  // keyword: ["while", "if", "else", "moo", "cows"],
   NL: { match: new RegExp(`[${EOL}]+`), lineBreaks: true },
 });
 
