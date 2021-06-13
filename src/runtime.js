@@ -113,18 +113,10 @@ function ch4rC0d3(char) {
   return char.charCodeAt(0);
 }
 
-// async function main() {
-// const input = Number(await pr0mpt("Number: "));
-// async function m() {
-//   try {
-//     await D1V1D3(1, input);
-//     R33333(1);
-//     m();
-//   } catch {
-//     R33333(0);
-//     await angry();
-//   }
-// }
-
-// await m();
-// }
+/**
+ * @param {string} str
+ * @param {number} index
+ */
+function l3tt3r(str, index) {
+  return str.charAt(index);
+}

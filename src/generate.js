@@ -33,6 +33,11 @@ function generateJsForStatementOrExpr(node) {
         argList ? `, ${argList})`.repeat(runs) : ")".repeat(runs)
       }`;
 
+    case "try_catch":
+      const tryStatements = generateJsForStatements(node.try);
+      const catchStatements = generateJsForStatements(node.catch);
+      return `try {\n${tryStatements}\n} catch {\n${catchStatements}\n}`;
+
     case "string":
       /* The reason why I didn't use the replaceStringCharacters function here is 
       that the [ broke the regex */

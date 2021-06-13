@@ -30,6 +30,7 @@ statement
     %}
   | fun_def {% id %}
   | return {% id %}
+  | try_catch {% id %}
 
 fun_def
   -> %identifier __ "moment" param_list:? block
@@ -64,6 +65,16 @@ return
     data => ({
       type: "return",
       expr: data[2]
+    })
+  %}
+
+try_catch
+  -> "yeah" block _ml "nah" block
+  {%
+    data => ({
+      type: "try_catch",
+      try: data[1],
+      catch: data[4]
     })
   %}
 

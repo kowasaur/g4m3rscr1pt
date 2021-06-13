@@ -28,6 +28,7 @@ var grammar = {
             },
     {"name": "statement", "symbols": ["fun_def"], "postprocess": id},
     {"name": "statement", "symbols": ["return"], "postprocess": id},
+    {"name": "statement", "symbols": ["try_catch"], "postprocess": id},
     {"name": "fun_def$ebnf$1", "symbols": ["param_list"], "postprocess": id},
     {"name": "fun_def$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
     {"name": "fun_def", "symbols": [(lexer.has("identifier") ? {type: "identifier"} : identifier), "__", {"literal":"moment"}, "fun_def$ebnf$1", "block"], "postprocess": 
@@ -55,6 +56,13 @@ var grammar = {
         data => ({
           type: "return",
           expr: data[2]
+        })
+          },
+    {"name": "try_catch", "symbols": [{"literal":"yeah"}, "block", "_ml", {"literal":"nah"}, "block"], "postprocess": 
+        data => ({
+          type: "try_catch",
+          try: data[1],
+          catch: data[4]
         })
           },
     {"name": "var_assign", "symbols": [(lexer.has("identifier") ? {type: "identifier"} : identifier), "_", {"literal":":"}, "_", "expr"], "postprocess": 
