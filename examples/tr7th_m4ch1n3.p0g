@@ -2,7 +2,7 @@
 @ If the input is anything else, it will print 1s indefinitely
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-@ prompt the user which "Number: " and store the input in the variable n
+@ prompt the user with "Number: " and store the input in the variable n
 n: /cl1ck1tyCl1ck{]Number: [}
 
 @ define a command called tr7th that has no parameters

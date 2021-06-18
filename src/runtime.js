@@ -12,6 +12,8 @@ function R33333(stringConveritble) {
     // normal case
   } else output = output.toUpperCase();
   console.log(output);
+  // So that super commands can be used
+  return output;
 }
 
 // Any maths will fail if the result is not safe
