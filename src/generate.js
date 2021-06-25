@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { hasExtension, replaceStringCharacters, jsifyString } = require("./util.js");
+const { replaceStringCharacters, jsifyString } = require("./util.js");
 const { numbers, wrapperStart, wrapperEnd } = require("./constants.js");
 
 function generateJsForStatementOrExpr(node) {
@@ -63,13 +63,10 @@ function generateJsForStatements(statements) {
   return lines.join(";\n") + ";";
 }
 
-const filename = process.argv[2];
-if (!hasExtension(filename, "ast")) throw new Error("You must provide a .ast file");
-
-const astJson = fs.readFileSync(filename, "utf8");
 const runtimeJs = fs.readFileSync("src/runtime.js", "utf8");
-const statements = JSON.parse(astJson);
-const jsCode = runtimeJs + wrapperStart + generateJsForStatements(statements) + wrapperEnd;
-const outputFilename = filename.replace(".ast", ".js");
-fs.writeFileSync(outputFilename, jsCode);
-console.log(`Wrote ${outputFilename}`);
+
+function generate(ast) {
+  return runtimeJs + wrapperStart + generateJsForStatements(ast) + wrapperEnd;
+}
+
+module.exports = generate;

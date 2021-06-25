@@ -1,9 +1,20 @@
 const { identifierChars } = require("./constants.js");
+const vowels = Object.values(identifierChars);
 
 function hasExtension(file, extension) {
   if (!file) return false;
   if (file.split(".").pop() === extension) return true;
   else return false;
+}
+
+/**
+ * @param {string} str
+ */
+function containsVowel(str) {
+  for (const vowel of vowels) {
+    if (str.includes(vowel)) return true;
+  }
+  return false;
 }
 
 /**
@@ -29,6 +40,7 @@ function jsifyString(str) {
 
 module.exports = {
   hasExtension,
+  containsVowel,
   replaceStringCharacters,
   jsifyString,
 };

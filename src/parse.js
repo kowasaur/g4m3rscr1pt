@@ -1,20 +1,13 @@
 const nearley = require("nearley");
-const fs = require("fs");
 const grammar = require("./grammar.js");
-const { hasExtension } = require("./util.js");
 
-const filename = process.argv[2];
-if (!hasExtension(filename, "p0g")) {
-  throw new Error("You must provide a .p0g file");
-}
-const code = fs.readFileSync(filename, "utf8");
 const parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar));
 
-parser.feed(code);
-if (parser.results.length > 1) throw new Error("Error: ambiguous grammar detected");
-else if (parser.results.length < 1) throw new Error("Error: no parse found");
+function parse(p0g) {
+  parser.feed(p0g);
+  if (parser.results.length > 1) throw new Error("Error: ambiguous grammar detected");
+  else if (parser.results.length < 1) throw new Error("Error: no parse found");
+  return parser.results[0];
+}
 
-const ast = parser.results[0];
-const outputFilename = filename.replace(".p0g", ".ast");
-fs.writeFileSync(outputFilename, JSON.stringify(ast, null, 2));
-console.log(`Wrote ${outputFilename}`);
+module.exports = parse;

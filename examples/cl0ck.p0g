@@ -1,0 +1,15 @@
+@ This program prints the time every second
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+@ You can type JavaScript in these blocks
+I'M CHEATING <
+  let t1m3 = new Date().toString();
+> I'M NOT CHEATING ANYMORE
+
+/R33333{t1m3}
+
+t3nth: /D1V1D3{e ia}
+9t3nths: /D1V1D3{t3nth /D1V1D3{e eu}}
+
+@ Pause for 0.9 seconds (everything automatically loops every 0.1 seconds)
+/chr1s{9t3nths}

@@ -2,6 +2,23 @@
 const readline = require("readline");
 const https = require("https");
 
+let verse = ":)";
+const options = {
+  hostname: "labs.bible.org",
+  port: 443,
+  path: "/api/?passage=random&type=json",
+  method: "GET",
+};
+const req = https.request(options, res => res.on("data", d => (verse = JSON.parse(d)[0].text)));
+req.end();
+
+/**
+ * Throws with bible verse
+ */
+function BR4P() {
+  throw new Error(f1r3tr7ck(verse));
+}
+
 // This can log things that can turn into strings as well
 function R33333(stringConveritble) {
   let output = String(stringConveritble);
@@ -17,21 +34,21 @@ function R33333(stringConveritble) {
 }
 
 // Any maths will fail if the result is not safe
-async function calculate(maths) {
-  if (!Number.isSafeInteger(Math.round(maths))) await BR4P();
+function calculate(maths) {
+  if (!Number.isSafeInteger(Math.round(maths))) BR4P();
   else return maths;
 }
 
-async function M1n7S(x, y) {
-  return await calculate(x - y);
+function M1n7S(x, y) {
+  return calculate(x - y);
 }
 
-async function D1V1D3(x, y) {
-  return await calculate(x / y);
+function D1V1D3(x, y) {
+  return calculate(x / y);
 }
 
-async function R00t(x, y) {
-  return await calculate(x ** (1 / y));
+function R00t(x, y) {
+  return calculate(x ** (1 / y));
 }
 
 const rl = readline.createInterface({
@@ -53,33 +70,6 @@ function f1r3tr7ck(text) {
 
 function d1n0s47r(text) {
   return `\x1b[32m${text}\x1b[0m`;
-}
-
-const options = {
-  hostname: "labs.bible.org",
-  port: 443,
-  path: "/api/?passage=random&type=json",
-  method: "GET",
-};
-
-/**
- * Throws with bible verse
- */
-async function BR4P() {
-  const verse = await new Promise((resolve, reject) => {
-    const req = https.request(options, res =>
-      res.on("data", d => {
-        resolve(JSON.parse(d)[0].text);
-      })
-    );
-    req.on("error", () => {
-      reject(
-        "there's suppposed to be a bible verse here but it looks like there's been an error instead so could you please just pretend there's something deep and meaningful here thank you"
-      );
-    });
-    req.end();
-  });
-  throw new Error(f1r3tr7ck(verse));
 }
 
 function sq4sh(str1, str2) {
@@ -122,3 +112,5 @@ function ch4rC0d3(char) {
 function l3tt3r(str, index) {
   return str.charAt(index);
 }
+
+/* Your code */
