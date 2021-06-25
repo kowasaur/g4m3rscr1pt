@@ -1,8 +1,7 @@
 {
   "name": "g4m3rscr1pt",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "An esolang that transpiles to JavaScript",
-  "main": "index.js",
   "scripts": {
     "gen-parser": "nearleyc src/grammar.ne -o src/grammar.js"
   },
