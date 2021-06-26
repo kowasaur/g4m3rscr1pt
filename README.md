@@ -56,9 +56,35 @@ Functions in g4m3rscr1pt are called commands.
 
 ### Defining Commands
 
+To define a command first write the name of the command, then `moment`. If it has any parameters, then write a pair of curly brackets and write the parameters within them, separated by a space. Don't include any curly brackets if there's no parameters. `??!?1!` is then used to start the definition and `!?!!??` to end it. Within those is where you write the code for the command. To return a value, write `https://imgur.com/jWr67J8` followed by the value. Here's an example:
+
+```
+@ addition command
+4dd moment {x y} ??!?1!
+  n1: /M1n7S{a e} @ negative 1
+  ny: /D1V1D3{y n1} @ negative y
+  https://imgur.com/jWr67J8 /M1n7S{x ny}
+!?!!??
+```
+
 ### Executing Commands
 
+To execute a command, type a `/` and then the name of the command. If there's any arguments, add a pair of curly brackets and separate each argument within them with a space. Example:
+
+```
+@ use the add command defined above
+/R33333{/4dd{i o}} @ prints 5
+/BR4P @ throws an error
+```
+
 #### Super Commands
+
+Using multiple `/` is called a super command. The value returned by the command is put back in as the first argument as many times as there are `/`. `99_b0ttl3s_2.p0g` in the `examples` folder utilises this.
+
+```
+x: /////M1n7S{ia e}
+/R33333{x} @ prints 5
+```
 
 ### Default Commands
 
@@ -121,7 +147,19 @@ Returns the character of `string` at `index`.
 
 Throws an error.
 
-## Try/Catch
+## YeahNah
+
+The equivalent of a try/catch is a yeahnah. Everything in the `yeah` block is run until there's an exception, in which case everything in the nah block is run. For example:
+
+```
+yeah ??!?1!
+  /R33333{]this is printed first[}
+  /D1V1D3{e a} @this throws an error since you can't divide by 0
+  /R33333{]this is never printed[}
+!?!!?? nah ??!?1!
+  /R33333{]this is printed second[}
+!?!!??
+```
 
 ## Cheating
 
