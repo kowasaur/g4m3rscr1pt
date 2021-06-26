@@ -1,0 +1,48 @@
+@ max safe integer
+M4X: /D1V1D3{]9007199254740991[ e} 
+
+4dd moment {x y} ??!?1!
+  n1: /M1n7S{a e} @ negative 1
+  ny: /D1V1D3{y n1} @ negative y
+  https://imgur.com/jWr67J8 /M1n7S{x ny}
+!?!!??
+
+@ geeksforgeeks.org/program-to-find-remainder-without-using-modulo-or-operator/
+m0d moment {n d} ??!?1!
+  d1ff: /M1n7S{n d}
+  yeah ??!?1!
+    /4dd{/4dd{M4X d1ff} e}
+    https://imgur.com/jWr67J8 n
+  @ n >= d
+  !?!!?? nah ??!?1!
+    https://imgur.com/jWr67J8 /m0d{d1ff d}
+  !?!!??
+!?!!??
+
+f1zzb7zz moment {x} ??!?1!
+  yeah ??!?1!
+    /D1V1D3{e /m0d{x ea}}
+    yeah ??!?1!
+      /D1V1D3{e /m0d{x o}}
+      @ else
+      /R33333{x}
+      @ if x % 3 == 0
+    !?!!?? nah ??!?1!
+      /R33333{]Fizz[}
+    !?!!??
+    @ if x % 5 == 0
+  !?!!?? nah ??!?1!
+    yeah ??!?1!
+      /D1V1D3{e /m0d{x o}}
+      /R33333{]Buzz[}
+      @ if x % 15 == 0
+    !?!!?? nah ??!?1!
+      /R33333{]FizzBuzz![}
+    !?!!??
+  !?!!??
+
+  https://imgur.com/jWr67J8 /4dd{x e}
+!?!!??
+
+////////////////////////////////////////////////////////////////////////////////////////////////////f1zzb7zz{e}
+/BR4P

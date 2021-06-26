@@ -88,7 +88,12 @@ x: /////M1n7S{ia e}
 
 ### Default Commands
 
-These commands are predefined in every g4m3rscr1pt program. Any commands that use maths will throw an error if rounding the result is not a safe integer (according to JavaScript).
+These commands are predefined in every g4m3rscr1pt program. Any commands that use maths will throw an error if rounding the result is not a safe integer (according to JavaScript). Also note that since g4m3rscr1pt transpiles to JavaScript, it has type coercion. For example:
+
+```
+/M1n7S{ea u}  @ 1
+/M1n7S{]5[ u} @ 1
+```
 
 #### R33333 {output}
 
