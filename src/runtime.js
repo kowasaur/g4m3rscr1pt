@@ -1,6 +1,7 @@
 /* This code is apart of the standard library */
 const readline = require("readline");
 const https = require("https");
+const fs = require("fs");
 
 let verse = ":)";
 const options = {
@@ -111,6 +112,11 @@ function ch4rC0d3(char) {
  */
 function l3tt3r(str, index) {
   return str.charAt(index);
+}
+
+
+function f1l3(path) {
+  return fs.readFileSync(path, "utf8");
 }
 
 /* Your code */

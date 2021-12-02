@@ -1,0 +1,45 @@
+@ This program reads input.txt and displays the sum of every line
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+@ Addition command
+4dd moment {x y} ??!?1!
+  n1: /M1n7S{a e} @ negative 1
+  ny: /D1V1D3{y n1} @ negative y
+  https://imgur.com/jWr67J8 /M1n7S{x ny}
+!?!!??
+
+f: /f1l3{]input.txt[}
+@ The final answer
+t0t4l: a
+@ The index (character) in the file
+1nd3x: a
+@ The string current being parsed
+str: ][
+
+s7m moment ??!?1!
+    ch4r: /l3tt3r{f 1nd3x}
+    yeah ??!?1!
+        @ If ch4r is empty go to nah (The E is arbitrary)
+        /D1V1D3{e /M1n7S{/ch4rC0d3{]E[} /ch4rC0d3{/sq4sh{ch4r ]E[}}}}
+
+        yeah ??!?1!
+            @ If ch4r is a new line character go to nah
+            /D1V1D3{e /M1n7S{/ch4rC0d3{ch4r} ia}}
+
+            str: /sq4sh{str ch4r}
+        !?!!?? nah ??!?1!
+            t0t4l: /4dd{t0t4l str}
+            str: ][
+        !?!!??
+
+        1nd3x: /4dd{1nd3x e}
+        /s7m
+    !?!!?? nah ??!?1!
+        t0t4l: /4dd{t0t4l str}
+    !?!!??
+!?!!??
+
+/s7m
+/R33333{t0t4l}
+
+/BR4P

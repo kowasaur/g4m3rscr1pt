@@ -20,4 +20,4 @@ const outputFilename = process.argv[4];
 if (outputFilename) {
   fs.writeFileSync(outputFilename, js);
   console.log(`Transpiled to ${outputFilename}`);
-} else eval(js);
+} else eval(js + "//# sourceURL=in-memory-file");

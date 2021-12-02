@@ -28,7 +28,7 @@ Note: when numbers are printed, they are displayed normally.
 
 ## Strings
 
-You use `]` to open a string and `[` to close it. For example `]this is a string[`. Only inline strings exist.
+You use `]` to open a string and `[` to close it. For example `]this is a string[`. Only single line strings exist.
 
 ## Variables
 
@@ -147,6 +147,10 @@ Returns the unicode number of the first character of `string`.
 #### l3tt3r {string index}
 
 Returns the character of `string` at `index`.
+
+#### f1l3 {path}
+
+Returns a string of the content in the file at `path`.
 
 #### BR4P
 

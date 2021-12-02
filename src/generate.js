@@ -1,6 +1,7 @@
 const fs = require("fs");
 const { replaceStringCharacters, jsifyString } = require("./util.js");
 const { numbers, wrapperStart, wrapperEnd } = require("./constants.js");
+const path = require("path");
 
 function generateJsForStatementOrExpr(node) {
   switch (node.type) {
@@ -63,7 +64,7 @@ function generateJsForStatements(statements) {
   return lines.join(";\n") + ";";
 }
 
-const runtimeJs = fs.readFileSync("src/runtime.js", "utf8");
+const runtimeJs = fs.readFileSync(path.join(__dirname, "runtime.js"), "utf8");
 
 function generate(ast) {
   return runtimeJs + wrapperStart + generateJsForStatements(ast) + wrapperEnd;
